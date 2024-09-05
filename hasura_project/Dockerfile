@@ -1,3 +1,0 @@
-# engine/Dockerfile
-FROM ghcr.io/hasura/v3-engine
-COPY ./build /md/

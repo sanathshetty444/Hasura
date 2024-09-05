@@ -1,0 +1,207 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Geo
+  fields:
+    - name: lat
+      type: String!
+    - name: lng
+      type: String!
+  graphql:
+    typeName: Geo
+    inputTypeName: GeoInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: nodejs_connector
+      dataConnectorObjectType: Geo
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Geo
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - lat
+          - lng
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Address
+  fields:
+    - name: city
+      type: String!
+    - name: geo
+      type: Geo!
+    - name: street
+      type: String!
+    - name: suite
+      type: String!
+    - name: zipcode
+      type: String!
+  graphql:
+    typeName: Address
+    inputTypeName: AddressInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: nodejs_connector
+      dataConnectorObjectType: Address
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Address
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - city
+          - geo
+          - street
+          - suite
+          - zipcode
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Company
+  fields:
+    - name: bs
+      type: String!
+    - name: catchPhrase
+      type: String!
+    - name: name
+      type: String!
+  graphql:
+    typeName: Company
+    inputTypeName: CompanyInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: nodejs_connector
+      dataConnectorObjectType: Company
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Company
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - bs
+          - catchPhrase
+          - name
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: User
+  fields:
+    - name: address
+      type: Address!
+    - name: company
+      type: Company!
+    - name: email
+      type: String!
+    - name: id
+      type: Float!
+    - name: name
+      type: String!
+    - name: phone
+      type: String!
+    - name: username
+      type: String!
+    - name: website
+      type: String!
+  graphql:
+    typeName: User
+    inputTypeName: UserInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: nodejs_connector
+      dataConnectorObjectType: User
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: User
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - address
+          - company
+          - email
+          - id
+          - name
+          - phone
+          - username
+          - website
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Todo
+  fields:
+    - name: completed
+      type: Boolean!
+    - name: id
+      type: Float!
+    - name: title
+      type: String!
+    - name: user
+      type: User!
+    - name: userId
+      type: Float!
+  graphql:
+    typeName: Todo
+    inputTypeName: TodoInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: nodejs_connector
+      dataConnectorObjectType: Todo
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Todo
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - completed
+          - id
+          - title
+          - user
+          - userId
+
+---
+kind: Command
+version: v1
+definition:
+  name: Todov2
+  outputType: "[Todo!]!"
+  source:
+    dataConnectorName: nodejs_connector
+    dataConnectorCommand:
+      function: todov2
+  graphql:
+    rootFieldName: todov2
+    rootFieldKind: Query
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: Todov2
+  permissions:
+    - role: admin
+      allowExecution: true
+

@@ -77,3 +77,11 @@ This service runs an OpenTelemetry (OTel) collector, which is used to gather and
 -   The `otel-collector` service uses an official OpenTelemetry collector image to gather telemetry data. It loads configuration from a local YAML file and exposes ports `4317` and `4318` for communication.
 
 This setup combines an engine **for handling API requests** and a telemetry collector for **observability**.
+
+### NodeJS connector steps
+
+https://hasura.io/docs/3.0/business-logic/typescript/#step-1-initialize-the-nodejs-lambda-connector
+
+ddn connector introspect nodejs_connector
+ddn command add nodejs_connector todov2  
+ddn supergraph build local

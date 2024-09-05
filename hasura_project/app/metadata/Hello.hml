@@ -1,0 +1,107 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: HelloOutputMembersA
+  fields:
+    - name: name
+      type: String!
+  graphql:
+    typeName: HelloOutputMembersA
+    inputTypeName: HelloOutputMembersAInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: nodejs_connector
+      dataConnectorObjectType: hello_output_members_a
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: HelloOutputMembersA
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - name
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: HelloOutputMembers
+  fields:
+    - name: a
+      type: HelloOutputMembersA!
+    - name: b
+      type: HelloOutputMembersA!
+  graphql:
+    typeName: HelloOutputMembers
+    inputTypeName: HelloOutputMembersInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: nodejs_connector
+      dataConnectorObjectType: hello_output_members
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: HelloOutputMembers
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - a
+          - b
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: HelloOutput
+  fields:
+    - name: members
+      type: HelloOutputMembers!
+  graphql:
+    typeName: HelloOutput
+    inputTypeName: HelloOutputInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: nodejs_connector
+      dataConnectorObjectType: hello_output
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: HelloOutput
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - members
+
+---
+kind: Command
+version: v1
+definition:
+  name: Hello
+  outputType: HelloOutput!
+  arguments:
+    - name: name
+      type: String
+  source:
+    dataConnectorName: nodejs_connector
+    dataConnectorCommand:
+      function: hello
+  graphql:
+    rootFieldName: hello
+    rootFieldKind: Query
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: Hello
+  permissions:
+    - role: admin
+      allowExecution: true
+

@@ -7,12 +7,12 @@ definition:
   includePaths:
     - metadata
   envMapping:
-    APP_MY_CONNECTOR_AUTHORIZATION_HEADER:
-      fromEnv: APP_MY_CONNECTOR_AUTHORIZATION_HEADER
-    APP_MY_CONNECTOR_READ_URL:
-      fromEnv: APP_MY_CONNECTOR_READ_URL
-    APP_MY_CONNECTOR_WRITE_URL:
-      fromEnv: APP_MY_CONNECTOR_WRITE_URL
+    APP_NODEJS_CONNECTOR_AUTHORIZATION_HEADER:
+      fromEnv: APP_NODEJS_CONNECTOR_AUTHORIZATION_HEADER
+    APP_NODEJS_CONNECTOR_READ_URL:
+      fromEnv: APP_NODEJS_CONNECTOR_READ_URL
+    APP_NODEJS_CONNECTOR_WRITE_URL:
+      fromEnv: APP_NODEJS_CONNECTOR_WRITE_URL
   connectors:
-    - path: connector/my_connector/connector.yaml
-      connectorLinkName: my_connector
+    - path: connector/nodejs_connector/connector.yaml
+      connectorLinkName: nodejs_connector

@@ -1,0 +1,55 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: TodoOutput
+  fields:
+    - name: completed
+      type: Boolean!
+    - name: id
+      type: Float!
+    - name: name
+      type: String!
+  graphql:
+    typeName: TodoOutput
+    inputTypeName: TodoOutputInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: nodejs_connector
+      dataConnectorObjectType: todo_output
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: TodoOutput
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - completed
+          - id
+          - name
+
+---
+kind: Command
+version: v1
+definition:
+  name: Todo
+  outputType: TodoOutput!
+  source:
+    dataConnectorName: nodejs_connector
+    dataConnectorCommand:
+      procedure: todo
+  graphql:
+    rootFieldName: todo
+    rootFieldKind: Mutation
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: Todo
+  permissions:
+    - role: admin
+      allowExecution: true
+

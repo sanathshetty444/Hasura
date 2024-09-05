@@ -1,5 +1,5 @@
 services:
-  app_my_connector:
+  app_nodejs_connector:
     build:
       context: .
       dockerfile: .hasura-connector/Dockerfile
@@ -15,13 +15,13 @@ services:
           action: sync+restart
           target: /functions
     environment:
-      HASURA_SERVICE_TOKEN_SECRET: $APP_MY_CONNECTOR_HASURA_SERVICE_TOKEN_SECRET
-      OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: $APP_MY_CONNECTOR_OTEL_EXPORTER_OTLP_TRACES_ENDPOINT
-      OTEL_SERVICE_NAME: $APP_MY_CONNECTOR_OTEL_SERVICE_NAME
+      HASURA_SERVICE_TOKEN_SECRET: $APP_NODEJS_CONNECTOR_HASURA_SERVICE_TOKEN_SECRET
+      OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: $APP_NODEJS_CONNECTOR_OTEL_EXPORTER_OTLP_TRACES_ENDPOINT
+      OTEL_SERVICE_NAME: $APP_NODEJS_CONNECTOR_OTEL_SERVICE_NAME
     extra_hosts:
       - local.hasura.dev=host-gateway
     ports:
       - mode: ingress
         target: 8080
-        published: "5764"
+        published: "8857"
         protocol: tcp
