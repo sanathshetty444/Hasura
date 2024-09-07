@@ -1,0 +1,52 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: LanguageFilterInput
+  fields:
+    - name: code
+      type: StringQueryOperatorInput
+  graphql:
+    typeName: LanguageFilterInput
+    inputTypeName: LanguageFilterInputInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: graphql_connector
+      dataConnectorObjectType: LanguageFilterInput
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: LanguageFilterInput
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - code
+
+---
+kind: Command
+version: v1
+definition:
+  name: Languages
+  outputType: "[Language!]!"
+  arguments:
+    - name: filter
+      type: LanguageFilterInput
+  source:
+    dataConnectorName: graphql_connector
+    dataConnectorCommand:
+      function: languages
+  graphql:
+    rootFieldName: languages
+    rootFieldKind: Query
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: Languages
+  permissions:
+    - role: admin
+      allowExecution: true
+
