@@ -109,3 +109,7 @@ docker compose --env-file ../../../.env up --build --watch
 ### Spin up nodejs connector
 
 docker compose --env-file ../../../.env up --build --watch
+
+### Spin up hasura engine and telemetry connector
+
+HASURA_DDN_PAT=$(ddn auth print-pat) docker compose --env-file .env up --build --watch
