@@ -7,6 +7,12 @@ definition:
   includePaths:
     - metadata
   envMapping:
+    APP_GRAPHQL_CONNECTOR_AUTHORIZATION_HEADER:
+      fromEnv: APP_GRAPHQL_CONNECTOR_AUTHORIZATION_HEADER
+    APP_GRAPHQL_CONNECTOR_READ_URL:
+      fromEnv: APP_GRAPHQL_CONNECTOR_READ_URL
+    APP_GRAPHQL_CONNECTOR_WRITE_URL:
+      fromEnv: APP_GRAPHQL_CONNECTOR_WRITE_URL
     APP_NODEJS_CONNECTOR_AUTHORIZATION_HEADER:
       fromEnv: APP_NODEJS_CONNECTOR_AUTHORIZATION_HEADER
     APP_NODEJS_CONNECTOR_READ_URL:
@@ -16,3 +22,5 @@ definition:
   connectors:
     - path: connector/nodejs_connector/connector.yaml
       connectorLinkName: nodejs_connector
+    - path: connector/graphql_connector/connector.yaml
+      connectorLinkName: graphql_connector

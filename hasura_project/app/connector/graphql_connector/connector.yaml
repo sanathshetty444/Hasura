@@ -1,0 +1,14 @@
+kind: Connector
+version: v2
+definition:
+  name: graphql_connector
+  subgraph: app
+  source: hasura/graphql:v0.1.3
+  context: .
+  envMapping:
+    HASURA_SERVICE_TOKEN_SECRET:
+      fromEnv: APP_GRAPHQL_CONNECTOR_HASURA_SERVICE_TOKEN_SECRET
+    OTEL_EXPORTER_OTLP_TRACES_ENDPOINT:
+      fromEnv: APP_GRAPHQL_CONNECTOR_OTEL_EXPORTER_OTLP_TRACES_ENDPOINT
+    OTEL_SERVICE_NAME:
+      fromEnv: APP_GRAPHQL_CONNECTOR_OTEL_SERVICE_NAME

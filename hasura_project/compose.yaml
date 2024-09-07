@@ -1,3 +1,5 @@
+include:
+  - path: app/connector/graphql_connector/compose.yaml
 services:
   engine:
     build:
@@ -7,8 +9,8 @@ services:
         COPY ./build /md/
     develop:
       watch:
-        - path: engine/build
-          action: sync+restart
+        - action: sync+restart
+          path: engine/build
           target: /md/
     env_file:
       - engine/.env.engine
@@ -16,9 +18,9 @@ services:
       - local.hasura.dev=host-gateway
     ports:
       - mode: ingress
-        target: 3000
-        published: "3000"
         protocol: tcp
+        published: "3000"
+        target: 3000
   otel-collector:
     command:
       - --config=/etc/otel-collector-config.yaml
@@ -27,12 +29,12 @@ services:
     image: otel/opentelemetry-collector:0.104.0
     ports:
       - mode: ingress
-        target: 4317
+        protocol: tcp
         published: "4317"
-        protocol: tcp
+        target: 4317
       - mode: ingress
-        target: 4318
-        published: "4318"
         protocol: tcp
+        published: "4318"
+        target: 4318
     volumes:
       - ./otel-collector-config.yaml:/etc/otel-collector-config.yaml

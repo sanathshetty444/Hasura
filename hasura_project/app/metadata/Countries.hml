@@ -1,0 +1,61 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: CountryFilterInput
+  fields:
+    - name: code
+      type: StringQueryOperatorInput
+    - name: continent
+      type: StringQueryOperatorInput
+    - name: currency
+      type: StringQueryOperatorInput
+    - name: name
+      type: StringQueryOperatorInput
+  graphql:
+    typeName: CountryFilterInput
+    inputTypeName: CountryFilterInputInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: graphql_connector
+      dataConnectorObjectType: CountryFilterInput
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: CountryFilterInput
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - code
+          - continent
+          - currency
+          - name
+
+---
+kind: Command
+version: v1
+definition:
+  name: Countries
+  outputType: "[Country!]!"
+  arguments:
+    - name: filter
+      type: CountryFilterInput
+  source:
+    dataConnectorName: graphql_connector
+    dataConnectorCommand:
+      function: countries
+  graphql:
+    rootFieldName: countries
+    rootFieldKind: Query
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: Countries
+  permissions:
+    - role: admin
+      allowExecution: true
+

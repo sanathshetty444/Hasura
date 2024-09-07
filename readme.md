@@ -85,3 +85,27 @@ https://hasura.io/docs/3.0/business-logic/typescript/#step-1-initialize-the-node
 ddn connector introspect nodejs_connector
 ddn command add nodejs_connector todov2  
 ddn supergraph build local
+
+| Build Version | 2ffd0fb9b8 |
++---------------+-------------------------------------------------------------------------------------------+
+| API URL | https://awaited-leech-1951-2ffd0fb9b8.ddn.hasura.app/graphql |
++---------------+-------------------------------------------------------------------------------------------+
+| Console URL | https://console.hasura.io/project/awaited-leech-1951/build/2ffd0fb9b8/graphql?scope=build |
++---------------+-------------------------------------------------------------------------------------------+
+| Project Name | awaited-leech-1951 |
+
+### Creating connector
+
+ddn connector init graphql*connector -i
+ddn connector introspect graphql_connector
+ddn model add graphql_connector "\*"
+ddn command add graphql*connector "\*"
+ddn relationship add graphql_connector "\*"
+
+### Spin up graphql connector
+
+docker compose --env-file ../../../.env up --build --watch
+
+### Spin up nodejs connector
+
+docker compose --env-file ../../../.env up --build --watch
